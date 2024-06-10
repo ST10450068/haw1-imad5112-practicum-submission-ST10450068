@@ -61,7 +61,7 @@ class MainScreen : AppCompatActivity() {
             if (strDayArray.isNotEmpty() && intMinArray.isNotEmpty() && intMaxArray.isNotEmpty() && strWeatherArray.isNotEmpty()) {
                 // Create an intent to start the detailed view activity
                 val intent = Intent(this, detailedViewScreen::class.java)
-                intent.putStringArrayListExtra("strDayArray", ArrayList(strDayArray))
+                intent.putStringArrayListExtra("strDayArray", ArrayList(strDayArray)) //developer.android.com.(2024)
                 intent.putIntegerArrayListExtra("intMinArray", ArrayList(intMinArray))
                 intent.putIntegerArrayListExtra("intMaxArray", ArrayList(intMaxArray))
                 intent.putStringArrayListExtra("strWeatherArray", ArrayList(strWeatherArray))
