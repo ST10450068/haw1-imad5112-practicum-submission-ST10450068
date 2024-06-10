@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
             nextPage.setOnClickListener {
                 // Create an intent to navigate to the MainScreen activity
-                val intent = Intent (this, MainScreen::class.java)
+                val intent = Intent (this, MainScreen::class.java) //developer.android.com. (2024).
                 startActivity(intent) // Start the MainScreen activity
 
             }
