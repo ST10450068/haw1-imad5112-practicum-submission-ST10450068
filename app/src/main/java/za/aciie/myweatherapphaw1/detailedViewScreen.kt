@@ -27,7 +27,7 @@ class detailedViewScreen : AppCompatActivity() {
         val avgMax = intent.getDoubleExtra("avgMax", 0.0)
 
         // Create a string to display the details
-        val details = StringBuilder()
+        val details = StringBuilder() //Oracle.(2024)
 
         if (dateArray != null && minArray != null && maxArray != null && weatherArray != null) {
             for (i in dateArray.indices) {
@@ -50,6 +50,8 @@ class detailedViewScreen : AppCompatActivity() {
         }
     }
 }
-
+//Oracle. (2024). Java ArrayList Documentation. Available at: https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html (Accessed: June 10, 2024).
+//developer.android.com. (2024). Android Intent Documentation. Available at: https://developer.android.com/reference/android/content/Intent (Accessed: June 10, 2024).
+//developer.android.com. (2024). setOnClickListener. Available at: https://developer.android.com/reference/android/view/View#setOnClickListener(android.view.View.OnClickListener) (Accessed: June 10, 2024).
 
 
