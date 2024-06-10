@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>MainScreen.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #808080;}
+.s3 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainScreen.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">za.aciie.myweatherapphaw1</span>
+
+<span class="s1">import android.content.Intent</span>
+<span class="s1">import android.os.Bundle</span>
+<span class="s1">import android.widget.Button</span>
+<span class="s1">import android.widget.EditText</span>
+<span class="s1">import android.widget.TextView</span>
+<span class="s1">import androidx.activity.enableEdgeToEdge</span>
+<span class="s1">import androidx.appcompat.app.AppCompatActivity</span>
+
+<span class="s1">import java.util.ArrayList</span>
+
+<span class="s0">class </span><span class="s1">MainScreen : AppCompatActivity() {</span>
+    <span class="s2">// Arrays to store the input data</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">strDayArray = mutableListOf&lt;String&gt;()</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">intMinArray = mutableListOf&lt;Int&gt;()</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">intMaxArray = mutableListOf&lt;Int&gt;()</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">strWeatherArray = mutableListOf&lt;String&gt;()</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">weeklyWeather = mutableListOf&lt;String&gt;()</span>
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreate(savedInstanceState: Bundle?) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span>
+        <span class="s1">enableEdgeToEdge()</span>
+        <span class="s1">setContentView(R.layout.activity_main_screen)</span>
+        <span class="s2">// Find the UI elements by their ID</span>
+        <span class="s0">val </span><span class="s1">strDay = findViewById&lt;EditText&gt;(R.id.strDay)</span>
+        <span class="s0">val </span><span class="s1">intMin = findViewById&lt;EditText&gt;(R.id.intMin)</span>
+        <span class="s0">val </span><span class="s1">intMax = findViewById&lt;EditText&gt;(R.id.intMax)</span>
+        <span class="s0">val </span><span class="s1">strWeather = findViewById&lt;EditText&gt;(R.id.strWeather)</span>
+        <span class="s0">val </span><span class="s1">resultTxt = findViewById&lt;TextView&gt;(R.id.resultTxt)</span>
+        <span class="s0">val </span><span class="s1">btnDetailed = findViewById&lt;Button&gt;(R.id.btnOfDets)</span>
+        <span class="s0">val </span><span class="s1">btnSubmit = findViewById&lt;Button&gt;(R.id.btnSubmit)</span>
+        <span class="s0">val </span><span class="s1">btnAvg = findViewById&lt;Button&gt;(R.id.btnAvg)</span>
+        <span class="s0">val </span><span class="s1">btnClear = findViewById&lt;Button&gt;(R.id.btnClear)</span>
+        <span class="s2">// Set the onClick listener for the submit button</span>
+        <span class="s1">btnSubmit.setOnClickListener {</span>
+            <span class="s0">val </span><span class="s1">day = strDay.text.toString()</span>
+            <span class="s0">val </span><span class="s1">Mininum = intMin.text.toString().toIntOrNull()</span>
+            <span class="s0">val </span><span class="s1">Maximum = intMax.text.toString().toIntOrNull()</span>
+            <span class="s0">val </span><span class="s1">Weather = strWeather.text.toString()</span>
+
+
+            <span class="s2">// Check if all inputs are valid</span>
+            <span class="s0">if </span><span class="s1">(day != </span><span class="s0">null </span><span class="s1">&amp;&amp; Mininum != </span><span class="s0">null </span><span class="s1">&amp;&amp; Maximum != </span><span class="s0">null </span><span class="s1">&amp;&amp; Weather.isNotEmpty()) {</span>
+                <span class="s2">// Add the inputs to their respective arrays</span>
+                <span class="s1">strDayArray.add(day)</span>
+                <span class="s1">intMinArray.add(Mininum)</span>
+                <span class="s1">intMaxArray.add(Maximum)</span>
+                <span class="s1">strWeatherArray.add(Weather)</span>
+                <span class="s1">weeklyWeather.add(</span><span class="s3">&quot;Day: </span><span class="s0">$</span><span class="s1">day</span><span class="s3">, Min: </span><span class="s0">$</span><span class="s1">Mininum</span><span class="s3">, Max: </span><span class="s0">$</span><span class="s1">Maximum</span><span class="s3">, Weather condition: </span><span class="s0">$</span><span class="s1">Weather</span><span class="s3">&quot;</span><span class="s1">)</span>
+                <span class="s2">// Display the collected data</span>
+                <span class="s1">resultTxt.text = weeklyWeather.joinToString(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s1">)</span>
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s2">// Show an error message if inputs are invalid</span>
+                <span class="s1">resultTxt.text = </span><span class="s3">&quot;Please fill all fields correctly&quot;</span>
+            <span class="s1">}</span>
+
+
+        <span class="s1">}</span>
+        <span class="s2">// Set the onClick listener for the detailed view button</span>
+        <span class="s1">btnDetailed.setOnClickListener {</span>
+            <span class="s0">if </span><span class="s1">(strDayArray.isNotEmpty() &amp;&amp; intMinArray.isNotEmpty() &amp;&amp; intMaxArray.isNotEmpty() &amp;&amp; strWeatherArray.isNotEmpty()) {</span>
+                <span class="s2">// Create an intent to start the detailed view activity</span>
+                <span class="s0">val </span><span class="s1">intent = Intent(</span><span class="s0">this, </span><span class="s1">detailedViewScreen::</span><span class="s0">class</span><span class="s1">.java)</span>
+                <span class="s1">intent.putStringArrayListExtra(</span><span class="s3">&quot;strDayArray&quot;</span><span class="s0">, </span><span class="s1">ArrayList(strDayArray))</span>
+                <span class="s1">intent.putIntegerArrayListExtra(</span><span class="s3">&quot;intMinArray&quot;</span><span class="s0">, </span><span class="s1">ArrayList(intMinArray))</span>
+                <span class="s1">intent.putIntegerArrayListExtra(</span><span class="s3">&quot;intMaxArray&quot;</span><span class="s0">, </span><span class="s1">ArrayList(intMaxArray))</span>
+                <span class="s1">intent.putStringArrayListExtra(</span><span class="s3">&quot;strWeatherArray&quot;</span><span class="s0">, </span><span class="s1">ArrayList(strWeatherArray))</span>
+                <span class="s1">startActivity(intent)</span>
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">resultTxt.text = </span><span class="s3">&quot;No data to display in the detailed view&quot;</span>
+            <span class="s1">}</span>
+
+            <span class="s1">btnAvg.setOnClickListener {</span>
+                <span class="s2">// Calculate averages</span>
+                <span class="s0">if </span><span class="s1">(intMinArray.isNotEmpty() &amp;&amp; intMaxArray.isNotEmpty()) {</span>
+                    <span class="s0">val </span><span class="s1">avgMin = intMinArray.average()</span>
+                    <span class="s0">val </span><span class="s1">avgMax = intMaxArray.average()</span>
+                    <span class="s1">resultTxt.text = </span><span class="s3">&quot;Average Min: </span><span class="s0">$</span><span class="s1">avgMin</span><span class="s0">\n</span><span class="s3">Average Max: </span><span class="s0">$</span><span class="s1">avgMax</span><span class="s3">&quot;</span>
+                <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                    <span class="s1">resultTxt.text = </span><span class="s3">&quot;No data to calculate average&quot;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+
+            <span class="s1">btnClear.setOnClickListener {</span>
+                <span class="s2">// Clear all arrays and text fields</span>
+                <span class="s1">strDayArray.clear()</span>
+                <span class="s1">intMinArray.clear()</span>
+                <span class="s1">intMaxArray.clear()</span>
+                <span class="s1">strWeatherArray.clear()</span>
+                <span class="s1">weeklyWeather.clear()</span>
+                <span class="s1">resultTxt.text = </span><span class="s3">&quot;&quot;</span>
+                <span class="s1">strDay.text.clear()</span>
+                <span class="s1">intMin.text.clear()</span>
+                <span class="s1">intMax.text.clear()</span>
+                <span class="s1">strWeather.text.clear()</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+
+
+
+
+</pre>
+</body>
+</html>

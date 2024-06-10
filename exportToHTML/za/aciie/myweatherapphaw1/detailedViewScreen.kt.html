@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>detailedViewScreen.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #808080;}
+.s3 { color: #6a8759;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+detailedViewScreen.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">za.aciie.myweatherapphaw1</span>
+
+<span class="s1">import android.content.Intent</span>
+<span class="s1">import android.os.Bundle</span>
+<span class="s1">import android.widget.Button</span>
+<span class="s1">import android.widget.TextView</span>
+<span class="s1">import androidx.activity.enableEdgeToEdge</span>
+<span class="s1">import androidx.appcompat.app.AppCompatActivity</span>
+<span class="s1">import androidx.core.view.ViewCompat</span>
+<span class="s1">import androidx.core.view.WindowInsetsCompat</span>
+
+<span class="s0">class </span><span class="s1">detailedViewScreen : AppCompatActivity() {</span>
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreate(savedInstanceState: Bundle?) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span>
+        <span class="s1">enableEdgeToEdge()</span>
+        <span class="s1">setContentView(R.layout.activity_detailed_view_screen)</span>
+        <span class="s2">// Find the UI elements by their ID</span>
+        <span class="s0">val </span><span class="s1">detailsView = findViewById&lt;TextView&gt;(R.id.detailsView)</span>
+        <span class="s0">val </span><span class="s1">exit = findViewById&lt;Button&gt;(R.id.btnExit)</span>
+        <span class="s0">val </span><span class="s1">btnBck = findViewById&lt;Button&gt;(R.id.btnBck)</span>
+        <span class="s2">// Retrieve data from the intent</span>
+        <span class="s0">val </span><span class="s1">dateArray = intent.getStringArrayListExtra(</span><span class="s3">&quot;strDayArray&quot;</span><span class="s1">)</span>
+        <span class="s0">val </span><span class="s1">minArray = intent.getIntegerArrayListExtra(</span><span class="s3">&quot;intMinArray&quot;</span><span class="s1">)</span>
+        <span class="s0">val </span><span class="s1">maxArray = intent.getIntegerArrayListExtra(</span><span class="s3">&quot;intMaxArray&quot;</span><span class="s1">)</span>
+        <span class="s0">val </span><span class="s1">weatherArray = intent.getStringArrayListExtra(</span><span class="s3">&quot;strWeatherArray&quot;</span><span class="s1">)</span>
+        <span class="s0">val </span><span class="s1">avgMin = intent.getDoubleExtra(</span><span class="s3">&quot;avgMin&quot;</span><span class="s0">, </span><span class="s4">0.0</span><span class="s1">)</span>
+        <span class="s0">val </span><span class="s1">avgMax = intent.getDoubleExtra(</span><span class="s3">&quot;avgMax&quot;</span><span class="s0">, </span><span class="s4">0.0</span><span class="s1">)</span>
+
+        <span class="s2">// Create a string to display the details</span>
+        <span class="s0">val </span><span class="s1">details = StringBuilder()</span>
+
+        <span class="s0">if </span><span class="s1">(dateArray != </span><span class="s0">null </span><span class="s1">&amp;&amp; minArray != </span><span class="s0">null </span><span class="s1">&amp;&amp; maxArray != </span><span class="s0">null </span><span class="s1">&amp;&amp; weatherArray != </span><span class="s0">null</span><span class="s1">) {</span>
+            <span class="s0">for </span><span class="s1">(i </span><span class="s0">in </span><span class="s1">dateArray.indices) {</span>
+                <span class="s1">details.append(</span><span class="s3">&quot;Date: </span><span class="s0">${</span><span class="s1">dateArray[i]</span><span class="s0">}</span><span class="s3">, Min: </span><span class="s0">${</span><span class="s1">minArray[i]</span><span class="s0">}</span><span class="s3">, Max: </span><span class="s0">${</span><span class="s1">maxArray[i]</span><span class="s0">}</span><span class="s3">, Weather: </span><span class="s0">${</span><span class="s1">weatherArray[i]</span><span class="s0">}\n</span><span class="s3">&quot;</span><span class="s1">)</span>
+            <span class="s1">}</span>
+            <span class="s1">details.append(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">Average Min: </span><span class="s0">$</span><span class="s1">avgMin</span><span class="s0">\n</span><span class="s3">Average Max: </span><span class="s0">$</span><span class="s1">avgMax</span><span class="s0">\n</span><span class="s3">Thank you for using the app :)&quot;</span><span class="s1">)</span>
+        <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">details.append(</span><span class="s3">&quot;No data available&quot;</span><span class="s1">)</span>
+        <span class="s1">}</span>
+        <span class="s2">// Display the details</span>
+        <span class="s1">detailsView.text = details.toString()</span>
+
+        <span class="s1">btnBck.setOnClickListener {</span>
+            <span class="s0">val </span><span class="s1">goBack = Intent(</span><span class="s0">this, </span><span class="s1">MainScreen::</span><span class="s0">class</span><span class="s1">.java)</span>
+            <span class="s1">startActivity(goBack)</span>
+        <span class="s1">}</span>
+
+        <span class="s1">exit.setOnClickListener {</span>
+            <span class="s1">finishAffinity()     </span><span class="s2">// Exit the app</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+
+
+</pre>
+</body>
+</html>

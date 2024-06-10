@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>MainActivity.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainActivity.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">za.aciie.myweatherapphaw1</span>
+
+<span class="s1">import android.content.Intent</span>
+<span class="s1">import android.os.Bundle</span>
+<span class="s1">import android.widget.Button</span>
+<span class="s1">import androidx.activity.enableEdgeToEdge</span>
+<span class="s1">import androidx.appcompat.app.AppCompatActivity</span>
+<span class="s1">import androidx.core.view.ViewCompat</span>
+<span class="s1">import androidx.core.view.WindowInsetsCompat</span>
+
+<span class="s0">class </span><span class="s1">MainActivity : AppCompatActivity() {</span>
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreate(savedInstanceState: Bundle?) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span>
+        <span class="s1">enableEdgeToEdge()</span>
+        <span class="s1">setContentView(R.layout.activity_main)</span>
+        <span class="s2">// Find the button for navigating to the next page by its ID</span>
+        <span class="s0">val </span><span class="s1">nextPage =  findViewById&lt;Button&gt;(R.id.btnNextPage)</span>
+
+            <span class="s1">nextPage.setOnClickListener {</span>
+                <span class="s2">// Create an intent to navigate to the MainScreen activity</span>
+                <span class="s0">val </span><span class="s1">intent = Intent (</span><span class="s0">this, </span><span class="s1">MainScreen::</span><span class="s0">class</span><span class="s1">.java)</span>
+                <span class="s1">startActivity(intent) </span><span class="s2">// Start the MainScreen activity</span>
+
+            <span class="s1">}</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>
